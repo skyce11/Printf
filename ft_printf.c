@@ -6,13 +6,12 @@
 /*   By: migonzal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 10:58:29 by migonzal          #+#    #+#             */
-/*   Updated: 2021/12/09 11:51:08 by migonzal         ###   ########.fr       */
+/*   Updated: 2021/12/14 11:55:38 by migonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdarg.h>
-
+#include "ft_printf.h"
+/*
 int ft_putper(char c)
 {
 	write(1, "%", 1);
@@ -55,20 +54,23 @@ int ft_putstr(char *str)
 	return (1);
 }
 
-
+*/
 int ft_distribution (char c, va_list arg)
 {
 	int sum;
-	if (c ==  'c' || c == '%')
+	if (c ==  'c')
 		sum = ft_putchar (va_arg(arg, int));
 	if (c == 's')
 		sum = ft_putstr(va_arg(arg, char*));
-	if (c == 'i')
+	if (c == 'i' || c == 'd')
 		sum = ft_putnbr(va_arg(arg, int));
 	if (c ==  '%')
 		sum = 	ft_putper(va_arg(arg, int));
+	if (c == 'x')
+		sum = ft_puthexlow(va_arg(arg, unsigned int));
+	if (c == 'X')
+		sum = ft_puthexupp(va_arg(arg, unsigned int));
 	return (sum);
-
 }
 
 
@@ -105,8 +107,8 @@ int ft_printf(const char *str, ...)
 
 int main()
 {
-	char a = '%';
-	const char *prueba = "%%";
+	int a = 711660;
+	const char *prueba = "%x";
 	ft_printf(prueba, a);
 	return (0);
 }
