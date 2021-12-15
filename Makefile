@@ -6,7 +6,7 @@ OBJS = ${SRCS:.c=.o}
 
 HDRS = ft_printf.h
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 cc = gcc
 RM = rm -f
@@ -17,8 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJS}
-	ar rc ${NAME} ${OBJS}
-	ranlib ${NAME}
+	ar rcs ${NAME} ${OBJS}
 
 all: ${NAME}
 

@@ -6,70 +6,33 @@
 /*   By: migonzal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 10:58:29 by migonzal          #+#    #+#             */
-/*   Updated: 2021/12/14 11:55:38 by migonzal         ###   ########.fr       */
+/*   Updated: 2021/12/15 12:20:36 by migonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-int ft_putper(char c)
-{
-	write(1, "%", 1);
-	return (1);
-}
-int ft_putchar (char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
 
 
-int	ft_putnbr(int nb)
-{
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		nb = -nb;
-
-	}
-	if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		nb = nb % 10;
-	}
-	if (nb < 10)
-	{
-		ft_putchar(nb + 48);
-	}
-	return (1);
-}
-
-int ft_putstr(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str && str[++i])
-		write(1, &str[i], 1);
-	return (1);
-}
-
-*/
 int ft_distribution (char c, va_list arg)
 {
 	int sum;
+
+	sum = 0;
 	if (c ==  'c')
-		sum = ft_putchar (va_arg(arg, int));
+		sum += ft_putchar (va_arg(arg, int));
 	if (c == 's')
-		sum = ft_putstr(va_arg(arg, char*));
+		sum += ft_putstr(va_arg(arg, char*));
 	if (c == 'i' || c == 'd')
-		sum = ft_putnbr(va_arg(arg, int));
+		sum += ft_putnbr(va_arg(arg, int));
 	if (c ==  '%')
-		sum = 	ft_putper(va_arg(arg, int));
+		sum += 	ft_putchar('%');
 	if (c == 'x')
-		sum = ft_puthexlow(va_arg(arg, unsigned int));
+		sum += ft_puthexlow(va_arg(arg, unsigned int));
 	if (c == 'X')
-		sum = ft_puthexupp(va_arg(arg, unsigned int));
+		sum += ft_puthexupp(va_arg(arg, unsigned int));
+	if (c == 'u')
+		sum += ft_putunbr(va_arg(arg, unsigned int));
+
 	return (sum);
 }
 
@@ -85,7 +48,8 @@ int ft_printf(const char *str, ...)
 	int i;
 
 	i = 0;
-	va_start(arg, str);
+	sum = 0;
+	va_start(arg, str); 
 
 	while (str[i])
 	{
@@ -101,14 +65,23 @@ int ft_printf(const char *str, ...)
 		i++;
 	}
 	va_end(arg);
-	return (0); 
+	return (sum); 
 }
 
-
+/*
 int main()
 {
-	int a = 711660;
-	const char *prueba = "%x";
-	ft_printf(prueba, a);
+	int a = '%';
+	int num;
+
+	const char *prueba = "%%";
+
+	num = ft_printf(prueba, a);
+	printf("\n");
+	printf("%d",num);
+	printf("\n");
+	num = printf("%%");
+	printf("\n");
+	printf("%d",num);
 	return (0);
-}
+}*/
