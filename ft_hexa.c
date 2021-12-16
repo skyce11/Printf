@@ -6,7 +6,7 @@
 /*   By: migonzal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:15:30 by migonzal          #+#    #+#             */
-/*   Updated: 2021/12/15 12:06:47 by migonzal         ###   ########.fr       */
+/*   Updated: 2021/12/16 10:19:12 by migonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,17 @@ int ft_puthexlow(unsigned int c)
 		num += ft_putchar(a[c]);
 	return (num);
 }
+/*
+int ft_putphex(void *c)
+{
+	char *a = "0123456789abcdef";
+	int num;
+
+	num = 0;
+	num += ft_putstr("0x");
+
+
+	
+}*/
 
 

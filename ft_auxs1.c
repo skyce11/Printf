@@ -6,19 +6,27 @@
 /*   By: migonzal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:09:23 by migonzal          #+#    #+#             */
-/*   Updated: 2021/12/15 12:20:03 by migonzal         ###   ########.fr       */
+/*   Updated: 2021/12/16 11:19:57 by migonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
-int ft_putper(char c)
+
+size_t ft_strlen(const char *s)
 {
-	write(1, '%', 1);
-	return (1);
+	size_t i;
+
+	i = 0;
+
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }
-*/
+
+
 int ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -30,6 +38,11 @@ int ft_putnbr(int nb)
 	int count;
 
 	count =  0;
+	if (nb == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return (11);
+	}
 	if (nb < 0)
 	{
 		count += ft_putchar ('-');
@@ -65,6 +78,7 @@ int ft_putunbr(unsigned int nb)
 
 	count = 0;
 
+
 	if (nb < 0)
 		nb = -nb;
 	if (nb >= 10)
@@ -76,3 +90,23 @@ int ft_putunbr(unsigned int nb)
 		count += ft_putchar ( nb + 48);
 	return (count);
 }
+
+int ft_putnbr_base(unsigned long long num, char *base)
+{
+	int i;
+	int len;
+
+	len = ft_strlen(base);
+	i = 0;
+	if (num < 0)
+	{
+		ft_putchar('-');
+		num = -num;
+	}
+	if (num >= (unsigned long long ) len)
+		i += ft_putnbr_base(num /len, base);
+	ft_putchar(base[(num % len)]);
+	i += 1;
+	return (i);
+}
+

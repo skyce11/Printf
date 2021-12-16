@@ -6,7 +6,7 @@
 /*   By: migonzal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 10:58:29 by migonzal          #+#    #+#             */
-/*   Updated: 2021/12/15 12:20:36 by migonzal         ###   ########.fr       */
+/*   Updated: 2021/12/16 11:23:00 by migonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ int ft_distribution (char c, va_list arg)
 		sum += ft_puthexupp(va_arg(arg, unsigned int));
 	if (c == 'u')
 		sum += ft_putunbr(va_arg(arg, unsigned int));
-
+	if (c == 'p')
+	{
+		ft_putstr("0x");
+		sum += ft_putnbr_base(va_arg(arg, unsigned long), "0123456789abcedf") + 2;
+	}
+	
 	return (sum);
 }
 
@@ -71,10 +76,11 @@ int ft_printf(const char *str, ...)
 /*
 int main()
 {
-	int a = '%';
+
+	int a = -2147483648;
 	int num;
 
-	const char *prueba = "%%";
+	const char *prueba = "%i";
 
 	num = ft_printf(prueba, a);
 	printf("\n");
@@ -84,4 +90,5 @@ int main()
 	printf("\n");
 	printf("%d",num);
 	return (0);
+
 }*/
